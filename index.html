@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #ffe6eb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            max-width: 400px;
+            width: 100%;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        h1 {
+            color: #ff4d6d;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #4a4a4a;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .emoji {
+            font-size: 50px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+
+        .primary-btn {
+            background-color: #ff4d6d;
+            color: white;
+        }
+
+        .primary-btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            width: 100%;
+            position: relative;
+        }
+
+        #no-btn {
+            background-color: #f0f0f0;
+            color: #555;
+            position: absolute;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        #yes-btn {
+            position: absolute;
+            z-index: 5;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div id="screen1">
+            <span class="emoji">🎁</span>
+            <h1>Hey, I made something for you...</h1>
+            <p>Click below whenever you're ready!</p>
+            <button class="primary-btn" onclick="nextScreen()">Continue</button>
+        </div>
+
+        <div id="screen2" class="hidden">
+            <span class="emoji">🥺</span>
+            <h1 id="question-text">Will you be my date this weekend?</h1>
+            <div class="btn-container" style="height: 50px;">
+                <button id="yes-btn" class="primary-btn" onclick="showFinale()">Yes</button>
+                <button id="no-btn">No</button>
+            </div>
+        </div>
+
+        <div id="screen3" class="hidden">
+            <span class="emoji">🥰🎉🥳</span>
+            <h1>Yay! ❤️</h1>
+            <p>I knew you'd say yes! Can't wait!</p>
+        </div>
+    </div>
+
+    <script>
+        function nextScreen() {
+            document.getElementById('screen1').classList.add('hidden');
+            document.getElementById('screen2').classList.remove('hidden');
+            setupNoButton();
+        }
+
+        function showFinale() {
+            document.getElementById('screen2').classList.add('hidden');
+            document.getElementById('screen3').classList.remove('hidden');
+        }
+
+        function setupNoButton() {
+            const noBtn = document.getElementById('no-btn');
+            const yesBtn = document.getElementById('yes-btn');
+            
+            yesBtn.style.left = '25%';
+            noBtn.style.left = '55%';
+
+            function moveButton() {
+                const card = document.querySelector('.card');
+                const padding = 40;
+                
+                const maxX = card.clientWidth - noBtn.clientWidth - padding;
+                const maxY = card.clientHeight - noBtn.clientHeight - padding;
+                
+                const randomX = Math.floor(Math.random() * maxX) - (card.clientWidth / 4);
+                const randomY = Math.floor(Math.random() * maxY) - (card.clientHeight / 3);
+
+                noBtn.style.left = randomX + 'px';
+                noBtn.style.top = randomY + 'px';
+            }
+
+            noBtn.addEventListener('mouseenter', moveButton);
+            noBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                moveButton();
+            });
+        }
+    </script>
+</body>
+</html>
