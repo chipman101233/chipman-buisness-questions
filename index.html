@@ -43,7 +43,7 @@
             opacity: 0.3;
             z-index: 1;
             user-select: none;
-            transform: scaleX(-1); /* Facing right */
+            transform: scaleX(-1);
         }
 
         .bg-f1-right {
@@ -89,7 +89,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
             max-width: 420px;
             width: 100%;
-            min-height: 340px;
+            min-height: 360px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -108,7 +108,7 @@
         p {
             color: #4a4a4a;
             font-size: 18px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .emoji {
@@ -171,18 +171,18 @@
             color: #ffcc00;
         }
 
-        /* Finale Grid for Your Photos */
-        .finale-grid {
+        /* Photos Grid Layout */
+        .photos-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
-            margin-top: 20px;
+            margin-bottom: 20px;
             width: 100%;
         }
 
-        .finale-grid img {
+        .photos-grid img {
             width: 100%;
-            height: 110px;
+            height: 100px;
             object-fit: cover;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.05);
@@ -195,6 +195,7 @@
 </head>
 <body>
 
+    <!-- Background Elements -->
     <div class="bg-dino">🦕</div>
     <div class="bg-f1-left">🏎️</div>
     <div class="bg-f1-right">🏎️</div>
@@ -205,15 +206,30 @@
         <div class="sliding-dog dog3">🦮</div>
     </div>
 
+    <!-- Main Card Container -->
     <div class="card">
         
+        <!-- SCREEN 1: INTRO (Now with your photos on front!) -->
         <div id="screen1">
             <span class="emoji">🎁</span>
             <h1>Hey, I made something for you...</h1>
+            
+            <div class="photos-grid">
+                <!-- Your Custom Dog Image -->
+                <img src="dog image.jpeg" alt="Cute dog">
+                <!-- Your Custom Mercedes F1 Image -->
+                <img src="Mercedes imagen.jpeg" alt="Mercedes F1">
+                <!-- Your Custom Dino Image -->
+                <img src="dino pic.jpeg" alt="Dino">
+                <!-- Tiramisu Image -->
+                <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400" alt="Tiramisu">
+            </div>
+
             <p>Click below whenever you're ready!</p>
             <button class="primary-btn" onclick="nextScreen(1, 2)">Continue</button>
         </div>
 
+        <!-- SCREEN 2: QUESTION 1 (Bhola) -->
         <div id="screen2" class="hidden">
             <span class="emoji">🥺</span>
             <h1>Is bhola mine??</h1>
@@ -223,6 +239,7 @@
             </div>
         </div>
 
+        <!-- SCREEN 3: QUESTION 2 (Marvel Fade) -->
         <div id="screen3" class="hidden">
             <span class="emoji">💥</span>
             <h1>Who's better?</h1>
@@ -232,6 +249,7 @@
             </div>
         </div>
 
+        <!-- SCREEN 4: QUESTION 3 (Missed You) -->
         <div id="screen4" class="hidden">
             <span class="emoji">🤔</span>
             <h1>How much do you think I missed you?</h1>
@@ -241,22 +259,18 @@
             </div>
         </div>
 
+        <!-- SCREEN 5: FAKEOUT WRONG ANSWER -->
         <div id="screen5" class="hidden">
             <span class="emoji">👀</span>
             <h1>Correct!</h1>
             <p id="fakeout-text" style="margin-top: 15px; font-weight: bold; color: #ff4d6d; min-height: 40px;"></p>
         </div>
 
+        <!-- SCREEN 6: ULTIMATE FINALE -->
         <div id="screen6" class="hidden">
-            <span class="emoji">🥰🎉🥳</span>
-            <h1>I love you and I rly missed you</h1>
-            
-            <div class="finale-grid">
-                <img src="dog image.jpeg" alt="Cute dog">
-                <img src="Mercedes imagen.jpeg" alt="Mercedes F1">
-                <img src="dino pic.jpeg" alt="Dino">
-                <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400" alt="Tiramisu">
-            </div>
+            <span class="emoji">🥰💖👑</span>
+            <h1 style="margin-bottom: 10px;">I love you and I rly missed you</h1>
+            <p style="color: #ff4d6d; font-weight: bold; font-size: 22px; margin-bottom: 0;">I'm glad you're back! Let's hang out soon!!</p>
         </div>
     </div>
 
