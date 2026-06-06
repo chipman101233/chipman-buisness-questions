@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You ❤️</title>
+    <title>For You Chahat</title>
     <style>
         * {
             box-sizing: border-box;
@@ -21,27 +21,88 @@
             overflow: hidden;
             text-align: center;
             padding: 20px;
+            position: relative;
         }
 
+        /* --- BACKGROUND DECORATIONS --- */
+        .bg-dino {
+            position: absolute;
+            font-size: 80px;
+            top: 10%;
+            left: 10%;
+            opacity: 0.25;
+            z-index: 1;
+            user-select: none;
+        }
+
+        .bg-f1-left {
+            position: absolute;
+            font-size: 60px;
+            top: 40%;
+            left: 5%;
+            opacity: 0.3;
+            z-index: 1;
+            user-select: none;
+            transform: scaleX(-1); /* Facing right */
+        }
+
+        .bg-f1-right {
+            position: absolute;
+            font-size: 60px;
+            top: 30%;
+            right: 5%;
+            opacity: 0.3;
+            z-index: 1;
+            user-select: none;
+        }
+
+        /* Moving Dogs at the bottom sliding side to side */
+        .dog-container {
+            position: absolute;
+            bottom: 25px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            z-index: 1;
+            user-select: none;
+        }
+
+        .sliding-dog {
+            font-size: 45px;
+            animation: slide 3.5s ease-in-out infinite alternate;
+        }
+
+        .dog2 { animation-delay: 0.8s; }
+        .dog3 { animation-delay: 1.6s; }
+
+        @keyframes slide {
+            0% { transform: translateX(-30px); }
+            100% { transform: translateX(30px); }
+        }
+
+        /* --- CARD STYLING --- */
         .card {
             background: white;
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            max-width: 420px;
             width: 100%;
-            min-height: 250px;
+            min-height: 340px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             position: relative;
+            z-index: 10;
         }
 
         h1 {
             color: #ff4d6d;
             font-size: 24px;
             margin-bottom: 20px;
+            line-height: 1.3;
         }
 
         p {
@@ -51,19 +112,19 @@
         }
 
         .emoji {
-            font-size: 50px;
+            font-size: 55px;
             margin-bottom: 15px;
             display: block;
         }
 
         button {
             padding: 12px 25px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             border: none;
             border-radius: 25px;
             cursor: pointer;
-            transition: transform 0.1s ease;
+            transition: all 0.2s ease;
         }
 
         .primary-btn {
@@ -83,17 +144,48 @@
             position: relative;
         }
 
+        /* Runaway Button Setup */
         #no-btn {
             background-color: #f0f0f0;
             color: #555;
             position: absolute;
             transition: all 0.2s ease;
-            z-index: 10;
+            z-index: 12;
         }
 
         #yes-btn {
             position: absolute;
             z-index: 5;
+        }
+
+        /* Captain America vs Iron Man Styles */
+        #cap-btn {
+            background-color: #0056b3;
+            color: white;
+            opacity: 1;
+            transition: opacity 1.2s ease;
+        }
+
+        #iron-btn {
+            background-color: #b30000;
+            color: #ffcc00;
+        }
+
+        /* Finale Grid for Your Photos */
+        .finale-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .finale-grid img {
+            width: 100%;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
 
         .hidden {
@@ -103,42 +195,115 @@
 </head>
 <body>
 
+    <div class="bg-dino">🦕</div>
+    <div class="bg-f1-left">🏎️</div>
+    <div class="bg-f1-right">🏎️</div>
+
+    <div class="dog-container">
+        <div class="sliding-dog dog1">🐕</div>
+        <div class="sliding-dog dog2">🐶</div>
+        <div class="sliding-dog dog3">🦮</div>
+    </div>
+
     <div class="card">
+        
         <div id="screen1">
             <span class="emoji">🎁</span>
             <h1>Hey, I made something for you...</h1>
             <p>Click below whenever you're ready!</p>
-            <button class="primary-btn" onclick="nextScreen()">Continue</button>
+            <button class="primary-btn" onclick="nextScreen(1, 2)">Continue</button>
         </div>
 
         <div id="screen2" class="hidden">
             <span class="emoji">🥺</span>
-            <h1 id="question-text">Will you be my date this weekend?</h1>
+            <h1>Is bhola mine??</h1>
             <div class="btn-container" style="height: 50px;">
-                <button id="yes-btn" class="primary-btn" onclick="showFinale()">Yes</button>
+                <button id="yes-btn" class="primary-btn" onclick="nextScreen(2, 3)">Yes</button>
                 <button id="no-btn">No</button>
             </div>
         </div>
 
         <div id="screen3" class="hidden">
+            <span class="emoji">💥</span>
+            <h1>Who's better?</h1>
+            <div class="btn-container" style="height: 50px; position: static; display: flex; gap: 15px;">
+                <button id="cap-btn" onclick="fadeCap()">Captain America</button>
+                <button id="iron-btn" onclick="nextScreen(3, 4)">Iron Man</button>
+            </div>
+        </div>
+
+        <div id="screen4" class="hidden">
+            <span class="emoji">🤔</span>
+            <h1>How much do you think I missed you?</h1>
+            <div class="btn-container" style="height: 50px; position: static; display: flex; gap: 15px;">
+                <button class="primary-btn" onclick="nextScreen(4, 'finale')">A lot</button>
+                <button style="background-color: #f0f0f0; color: #555;" onclick="nextScreen(4, 'fakeout')">Very little</button>
+            </div>
+        </div>
+
+        <div id="screen5" class="hidden">
+            <span class="emoji">👀</span>
+            <h1>Correct!</h1>
+            <p id="fakeout-text" style="margin-top: 15px; font-weight: bold; color: #ff4d6d; min-height: 40px;"></p>
+        </div>
+
+        <div id="screen6" class="hidden">
             <span class="emoji">🥰🎉🥳</span>
-            <h1>Yay! ❤️</h1>
-            <p>I knew you'd say yes! Can't wait!</p>
+            <h1>I love you and I rly missed you</h1>
+            
+            <div class="finale-grid">
+                <img src="dog image.jpeg" alt="Cute dog">
+                <img src="Mercedes imagen.jpeg" alt="Mercedes F1">
+                <img src="dino pic.jpeg" alt="Dino">
+                <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400" alt="Tiramisu">
+            </div>
         </div>
     </div>
 
     <script>
-        function nextScreen() {
-            document.getElementById('screen1').classList.add('hidden');
-            document.getElementById('screen2').classList.remove('hidden');
-            setupNoButton();
+        // Handle transitions between screens
+        function nextScreen(current, next) {
+            if (next === 'fakeout') {
+                document.getElementById('screen4').classList.add('hidden');
+                document.getElementById('screen5').classList.remove('hidden');
+                
+                const textElement = document.getElementById('fakeout-text');
+                textElement.innerText = "";
+                
+                setTimeout(() => {
+                    textElement.innerText = "Just kidding. This was the wrong answer. Try again! 😂";
+                }, 800);
+
+                // Send them back to the question card
+                setTimeout(() => {
+                    document.getElementById('screen5').classList.add('hidden');
+                    document.getElementById('screen4').classList.remove('hidden');
+                }, 3500);
+                return;
+            }
+
+            document.getElementById('screen' + current).classList.add('hidden');
+            
+            if (next === 'finale') {
+                document.getElementById('screen6').classList.remove('hidden');
+            } else {
+                document.getElementById('screen' + next).classList.remove('hidden');
+                if (next === 2) {
+                    setupNoButton();
+                }
+            }
         }
 
-        function showFinale() {
-            document.getElementById('screen2').classList.add('hidden');
-            document.getElementById('screen3').classList.remove('hidden');
+        // Captain America button fade effect
+        function fadeCap() {
+            const capBtn = document.getElementById('cap-btn');
+            capBtn.style.opacity = '0';
+            setTimeout(() => {
+                capBtn.style.pointerEvents = 'none';
+            }, 600);
         }
 
+        // Runaway "No" Button Logic
         function setupNoButton() {
             const noBtn = document.getElementById('no-btn');
             const yesBtn = document.getElementById('yes-btn');
