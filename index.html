@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You Chahat</title>
+    <title>HI Chahat</title>
     <style>
         * {
             box-sizing: border-box;
@@ -84,12 +84,12 @@
         /* --- CARD STYLING --- */
         .card {
             background: white;
-            padding: 30px;
+            padding: 40px 30px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
             max-width: 420px;
             width: 100%;
-            min-height: 360px;
+            min-height: 320px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -100,7 +100,7 @@
 
         h1 {
             color: #ff4d6d;
-            font-size: 24px;
+            font-size: 26px;
             margin-bottom: 20px;
             line-height: 1.3;
         }
@@ -108,17 +108,17 @@
         p {
             color: #4a4a4a;
             font-size: 18px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .emoji {
-            font-size: 55px;
-            margin-bottom: 15px;
+            font-size: 60px;
+            margin-bottom: 20px;
             display: block;
         }
 
         button {
-            padding: 12px 25px;
+            padding: 12px 30px;
             font-size: 16px;
             font-weight: bold;
             border: none;
@@ -144,18 +144,20 @@
             position: relative;
         }
 
-        /* Runaway Button Setup */
+        /* Runaway Button Setup Fix */
         #no-btn {
             background-color: #f0f0f0;
             color: #555;
             position: absolute;
             transition: all 0.2s ease;
             z-index: 12;
+            left: 55%; /* Spaced out horizontally from Yes */
         }
 
         #yes-btn {
             position: absolute;
             z-index: 5;
+            left: 15%; /* Kept safely on the left side */
         }
 
         /* Captain America vs Iron Man Styles */
@@ -169,23 +171,6 @@
         #iron-btn {
             background-color: #b30000;
             color: #ffcc00;
-        }
-
-        /* Photos Grid Layout */
-        .photos-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-            width: 100%;
-        }
-
-        .photos-grid img {
-            width: 100%;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
 
         .hidden {
@@ -209,22 +194,10 @@
     <!-- Main Card Container -->
     <div class="card">
         
-        <!-- SCREEN 1: INTRO (Now with your photos on front!) -->
+        <!-- SCREEN 1: INTRO -->
         <div id="screen1">
             <span class="emoji">🎁</span>
             <h1>Hey, I made something for you...</h1>
-            
-            <div class="photos-grid">
-                <!-- Your Custom Dog Image -->
-                <img src="dog image.jpeg" alt="Cute dog">
-                <!-- Your Custom Mercedes F1 Image -->
-                <img src="Mercedes imagen.jpeg" alt="Mercedes F1">
-                <!-- Your Custom Dino Image -->
-                <img src="dino pic.jpeg" alt="Dino">
-                <!-- Tiramisu Image -->
-                <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400" alt="Tiramisu">
-            </div>
-
             <p>Click below whenever you're ready!</p>
             <button class="primary-btn" onclick="nextScreen(1, 2)">Continue</button>
         </div>
@@ -269,13 +242,12 @@
         <!-- SCREEN 6: ULTIMATE FINALE -->
         <div id="screen6" class="hidden">
             <span class="emoji">🥰💖👑</span>
-            <h1 style="margin-bottom: 10px;">I love you and I rly missed you</h1>
+            <h1 style="margin-bottom: 15px;">I love you and I rly missed you</h1>
             <p style="color: #ff4d6d; font-weight: bold; font-size: 22px; margin-bottom: 0;">I'm glad you're back! Let's hang out soon!!</p>
         </div>
     </div>
 
     <script>
-        // Handle transitions between screens
         function nextScreen(current, next) {
             if (next === 'fakeout') {
                 document.getElementById('screen4').classList.add('hidden');
@@ -288,7 +260,6 @@
                     textElement.innerText = "Just kidding. This was the wrong answer. Try again! 😂";
                 }, 800);
 
-                // Send them back to the question card
                 setTimeout(() => {
                     document.getElementById('screen5').classList.add('hidden');
                     document.getElementById('screen4').classList.remove('hidden');
@@ -308,7 +279,6 @@
             }
         }
 
-        // Captain America button fade effect
         function fadeCap() {
             const capBtn = document.getElementById('cap-btn');
             capBtn.style.opacity = '0';
@@ -317,12 +287,12 @@
             }, 600);
         }
 
-        // Runaway "No" Button Logic
         function setupNoButton() {
             const noBtn = document.getElementById('no-btn');
             const yesBtn = document.getElementById('yes-btn');
             
-            yesBtn.style.left = '25%';
+            // Fixed initial screen layouts to give plenty of room
+            yesBtn.style.left = '15%';
             noBtn.style.left = '55%';
 
             function moveButton() {
@@ -348,3 +318,4 @@
     </script>
 </body>
 </html>
+
